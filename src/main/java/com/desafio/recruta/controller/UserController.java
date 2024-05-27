@@ -20,10 +20,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<User> create(@RequestBody User user) {
-        return ResponseEntity.ok(userService.createUser(user));
-    }
+    // @PostMapping
+    // public ResponseEntity<User> create(@RequestBody User user) {
+    //     return ResponseEntity.ok(userService.createUser(user));
+    // }
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
