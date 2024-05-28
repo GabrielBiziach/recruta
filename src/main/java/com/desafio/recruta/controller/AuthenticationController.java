@@ -1,6 +1,8 @@
 package com.desafio.recruta.controller;
 
+import com.desafio.recruta.config.TokenService;
 import com.desafio.recruta.dto.AuthenticationDTO;
+import com.desafio.recruta.dto.LoginResponseDTO;
 import com.desafio.recruta.dto.RegisterDTO;
 import com.desafio.recruta.entity.User;
 import com.desafio.recruta.repository.UserRepository;
@@ -25,13 +27,17 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationDTO authenticationDTO) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDTO.username(), authenticationDTO.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
+        var token = tokenService.generateToken((User) auth.getPrincipal());
         
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
