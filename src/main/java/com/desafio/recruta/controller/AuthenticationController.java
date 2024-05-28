@@ -49,7 +49,9 @@ public class AuthenticationController {
         User newUser = new User(
             registerDTO.username(),
             encryptedPassword,
-            registerDTO.role()
+            registerDTO.role(),
+            registerDTO.name(),
+            registerDTO.email()
         );
         this.userRepository.save(newUser);
         
