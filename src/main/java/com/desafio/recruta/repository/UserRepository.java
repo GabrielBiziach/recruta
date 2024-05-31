@@ -8,4 +8,5 @@ import com.desafio.recruta.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     UserDetails findByUsername(String username);
+    User findUserByUsername(String username);
 }

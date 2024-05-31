@@ -54,6 +54,7 @@ public class ApplicationJobService {
         application.setJob(job);
         application.setApplicationDate(applicationDetails.getApplicationDate());
         application.setStatus(applicationDetails.getStatus());
+        application.setFeedback(applicationDetails.getFeedback());
         
         return applicationJobRepository.save(application);
     }

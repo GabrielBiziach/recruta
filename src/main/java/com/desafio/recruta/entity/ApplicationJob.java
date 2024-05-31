@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.desafio.recruta.enums.ApplicationJobStatus;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -34,5 +35,8 @@ public class ApplicationJob {
     
     @Enumerated(EnumType.STRING)
     private ApplicationJobStatus status;
+
+    @Column(length = 1000)
+    private String feedback; 
 
 }

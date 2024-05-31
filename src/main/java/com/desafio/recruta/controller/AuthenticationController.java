@@ -6,6 +6,7 @@ import com.desafio.recruta.dto.LoginResponseDTO;
 import com.desafio.recruta.dto.RegisterDTO;
 import com.desafio.recruta.entity.User;
 import com.desafio.recruta.repository.UserRepository;
+import com.desafio.recruta.service.AuthorizationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ public class AuthenticationController {
     private UserRepository userRepository;
 
     @Autowired
+    private AuthorizationService authorizationService;
+
+    @Autowired
     private TokenService tokenService;
 
 
@@ -36,8 +40,9 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDTO.username(), authenticationDTO.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = tokenService.generateToken((User) auth.getPrincipal());
-        
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        var user = authorizationService.findUserByUsername(authenticationDTO.username());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token, user.getRole().getRole(), user.getId(), user.getUsername()));
     }
 
     @PostMapping("/register")
