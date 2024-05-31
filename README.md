@@ -78,5 +78,5 @@ Este projeto está licenciado sob a [Licença XYZ]. Consulte o arquivo `LICENSE`
 
 ## Contato
 
-Gabriel Biziach - [gabrielbiziach@gmail.com] - [https://](https://www.linkedin.com/in/gabriel-biziach-rodrigues/)
+Gabriel Biziach - [email](gabrielbiziach@gmail.com) - [LinkedIn](https://www.linkedin.com/in/gabriel-biziach-rodrigues/)
 
