@@ -4,6 +4,7 @@ import com.desafio.recruta.config.TokenService;
 import com.desafio.recruta.dto.AuthenticationDTO;
 import com.desafio.recruta.dto.LoginResponseDTO;
 import com.desafio.recruta.dto.RegisterDTO;
+import com.desafio.recruta.entity.Job;
 import com.desafio.recruta.entity.User;
 import com.desafio.recruta.repository.UserRepository;
 import com.desafio.recruta.service.AuthorizationService;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +64,21 @@ public class AuthenticationController {
         this.userRepository.save(newUser);
         
         return ResponseEntity.ok().build();
+    }
+
+    
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return authorizationService.getUserById(id)
+                .map(user -> ResponseEntity.ok().body(new User(
+                    user.getId(),
+                    user.getUsername(),
+                    null,
+                    user.getRole(),
+                    user.getName(),
+                    user.getEmail()
+                )))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }

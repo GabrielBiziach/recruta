@@ -41,6 +41,7 @@ public class SecurityConfigurations {
                     .requestMatchers(HttpMethod.DELETE, "/api/job/**").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.GET, "/api/job/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/user/getAll").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/auth/user/**").permitAll()
                     .anyRequest().authenticated())
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
             .build();

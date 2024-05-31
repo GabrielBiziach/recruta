@@ -1,11 +1,14 @@
 package com.desafio.recruta.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.desafio.recruta.entity.Job;
 import com.desafio.recruta.entity.User;
 import com.desafio.recruta.repository.UserRepository;
 
@@ -22,6 +25,11 @@ public class AuthorizationService implements UserDetailsService{
 
     public User findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
+    }
+
+    
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
 }
